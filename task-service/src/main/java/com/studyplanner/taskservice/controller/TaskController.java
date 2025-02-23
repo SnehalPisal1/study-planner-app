@@ -21,10 +21,10 @@ public class TaskController {
         if(response != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
-        else{
-
-            return null;
-
+        else {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();   // This returns an empty response body with BAD_REQUEST status
         }
     }
 
