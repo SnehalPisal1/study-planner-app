@@ -8,6 +8,6 @@ public interface TaskServices {
 
     Task createTask(Task task);
 
-    //List<Task> getAllTasks();
+    List<Task> getAllTasks();
 
 }

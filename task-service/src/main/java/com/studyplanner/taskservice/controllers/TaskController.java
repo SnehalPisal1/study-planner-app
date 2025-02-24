@@ -28,6 +28,11 @@ public class TaskController {
         }
     }
 
+    @RequestMapping("/tasks")
+    public ResponseEntity<List<task>> getAllTasks(){
+
+    }
+
 
 
 }
