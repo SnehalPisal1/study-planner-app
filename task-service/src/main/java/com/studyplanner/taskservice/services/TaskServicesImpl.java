@@ -1,9 +1,11 @@
-package com.studyplanner.taskservice.service;
+package com.studyplanner.taskservice.services;
 
-import com.studyplanner.taskservice.model.Task;
-import com.studyplanner.taskservice.repository.TaskRepository;
+import com.studyplanner.taskservice.models.Task;
+import com.studyplanner.taskservice.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskServicesImpl implements TaskServices {
@@ -14,6 +16,11 @@ public class TaskServicesImpl implements TaskServices {
     @Override
     public Task createTask(Task task) {
        return taskRepository.save(task);
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return null;
     }
 
 }

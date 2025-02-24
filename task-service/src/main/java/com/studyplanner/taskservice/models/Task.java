@@ -1,4 +1,4 @@
-package com.studyplanner.taskservice.model;
+package com.studyplanner.taskservice.models;
 
 import jakarta.persistence.*;
 import lombok.*;
