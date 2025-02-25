@@ -26,7 +26,7 @@
             <constraints nullable="false"/>
         </column>
 
-        <!-- com.stadyplanner.userservice.User ID Column -->
+        <!-- models.com.stadyplanner.userservice.controllers.User ID Column -->
         <column name="user_id" type="BIGINT">
             <constraints nullable="false"/>
         </column>

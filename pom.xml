@@ -26,7 +26,6 @@
     <java.version>17</java.version>
     <spring-cloud.version>2022.0.4</spring-cloud.version>
     <mysql.connector.version>8.0.33</mysql.connector.version>
-    <lombok.version>1.18.30</lombok.version>
     <liquibase.version>4.24.0</liquibase.version>
     <jjwt.version>0.11.5</jjwt.version>
     <springdoc.version>2.2.0</springdoc.version>
@@ -56,13 +55,6 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- SpringDoc OpenAPI -->
@@ -102,6 +94,13 @@
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.36</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </dependencyManagement>
