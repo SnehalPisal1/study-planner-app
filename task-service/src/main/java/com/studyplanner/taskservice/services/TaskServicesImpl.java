@@ -23,4 +23,14 @@ public class TaskServicesImpl implements TaskServices {
         return taskRepository.findAll();
     }
 
+    @Override
+    public void deleteTask(long taskId) {
+        taskRepository.deleteById(taskId);
+    }
+
+    @Override
+    public boolean findTask(long taskId) {
+        return taskRepository.existsById(taskId);
+    }
+
 }

@@ -12,4 +12,7 @@ public interface TaskServices {
 
     List<Task> getAllTasks();
 
+    void deleteTask(long taskId);
+
+    boolean findTask(long taskId);
 }

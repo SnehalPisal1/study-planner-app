@@ -51,4 +51,22 @@ public class TaskController {
 
     }
 
+    @DeleteMapping("/tasks/{taskId}")
+    public ResponseEntity<?> deleteTask(@PathVariable long taskId){
+
+        boolean exists = taskServicesImpl.findTask(taskId);
+
+        Map<String, String> response = new HashMap<>();
+        if(!exists){
+            response.put("message","TASK NOT FOUND");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        else {
+            response.put("message","TASK SUCCESSFULLY DELETED");
+            taskServicesImpl.deleteTask(taskId);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        }
+    }
 }
