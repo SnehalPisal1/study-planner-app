@@ -81,6 +81,11 @@ public class TaskController {
                         .body(Map.of("message", "Task ID in path does not match task ID in request body"));
             }
 
+            if(!taskServicesImpl.findTask(taskId)){
+                return ResponseEntity.badRequest()
+                        .body(Map.of("message", "Incorrect Task ID"));
+            }
+
             Task updatedTask = taskServicesImpl.updateTask(task);
 
             if (updatedTask != null) {
