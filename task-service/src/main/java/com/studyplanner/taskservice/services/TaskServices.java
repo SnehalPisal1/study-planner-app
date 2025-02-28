@@ -15,4 +15,6 @@ public interface TaskServices {
     void deleteTask(long taskId);
 
     boolean findTask(long taskId);
+
+    Task updateTask(Task task);
 }

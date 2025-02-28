@@ -2,6 +2,7 @@ package com.studyplanner.taskservice.controllers;
 
 import com.studyplanner.taskservice.models.Task;
 import com.studyplanner.taskservice.services.TaskServicesImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +59,7 @@ public class TaskController {
 
         Map<String, String> response = new HashMap<>();
         if(!exists){
-            response.put("message","TASK NOT FOUND");
+            response.put("message","TASK not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
 
@@ -67,6 +68,30 @@ public class TaskController {
             taskServicesImpl.deleteTask(taskId);
             return ResponseEntity.status(HttpStatus.OK).body(response);
 
+        }
+
+    }
+
+    @PutMapping("/tasks/{taskId}")
+    public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task) {
+        try {
+            // Ensure the path ID matches the task ID to prevent confusion
+            if (!taskId.equals(task.getTaskId())) {
+                return ResponseEntity.badRequest()
+                        .body(Map.of("message", "Task ID in path does not match task ID in request body"));
+            }
+
+            Task updatedTask = taskServicesImpl.updateTask(task);
+
+            if (updatedTask != null) {
+                return ResponseEntity.ok(updatedTask);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("message", "Task not found or failed to update"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "Error updating task: " + e.getMessage()));
         }
     }
 }
