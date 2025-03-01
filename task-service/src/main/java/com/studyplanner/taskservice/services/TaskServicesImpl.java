@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class TaskServicesImpl implements TaskServices {
 
-    @Autowired(required = true)
+    @Autowired
     TaskRepository taskRepository;
 
     @Override
