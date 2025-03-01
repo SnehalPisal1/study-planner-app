@@ -51,7 +51,9 @@ public class TaskServicesImpl implements TaskServices {
            existingTask.setStatus(task.getStatus());
            existingTask.setDueDate(task.getDueDate());
 
+           taskRepository.save(existingTask);
            return existingTask;
+
        }else {
            return null; //task not found
        }
