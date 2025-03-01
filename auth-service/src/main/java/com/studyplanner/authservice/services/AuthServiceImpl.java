@@ -1,6 +1,7 @@
 package com.studyplanner.authservice.services;
 
 import com.studyplanner.authservice.dto.LoginRequest;
+import com.studyplanner.authservice.securityUtility.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -39,7 +40,6 @@ public class AuthServiceImpl implements AuthService{
             // return Token
             return ResponseEntity.ok(Map.of("AuthToken", token));
 
-            return null;
         }catch (BadCredentialsException e){
            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message","Invalid username or password"));
         }
