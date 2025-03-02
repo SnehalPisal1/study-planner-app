@@ -27,11 +27,11 @@ public class AuthServiceImpl implements AuthService{
 
         try {
             //authenticationManager checks credentials i.e authenticate user
-
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername()
+
                     , loginRequest.getPassword()));
 
-            // DaoAuthenticationProvider - > UserDetailsService -> load user from DB
+            // TODO - DaoAuthenticationProvider - > UserDetailsService -> load user from DB
             // if password matches
 
             // JwtUtil generates token
