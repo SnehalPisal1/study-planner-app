@@ -1,5 +1,7 @@
 package com.studyplanner.authservice.config;
 
+import com.studyplanner.authservice.securityUtility.JwtAuthFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfigs {
 
+    @Autowired
+    private JwtAuthFilter jwtAuthFilter;
+
     //use filter chain to intercept request, enforce security rules and manages sessions or tokens
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -25,6 +30,8 @@ public class SecurityConfigs {
                 .permitAll().anyRequest().authenticated())
                 .sessionManagement(session
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
         ; // JWT used for Stateless authentication
         return http.build();
     }
