@@ -1,11 +1,11 @@
 package com.stadyplanner.userservice.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -23,7 +24,7 @@ public class User {
     @Column(name="user_id")
     private long userId;
 
-    @NotNull
+    @NotNull(message = "User name should not be null")
     @Column(name="username" , unique = true , nullable = false)
     private String username;
 
@@ -32,6 +33,7 @@ public class User {
     private String password;
 
     @NotNull
+    @Email(message = "Invalid email format")
     @Column(name="mail_id", unique = true, nullable = false)
     private String mailId;
 

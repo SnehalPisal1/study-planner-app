@@ -1,7 +1,10 @@
 package com.stadyplanner.userservice.services;
 
-import org.springframework.stereotype.Service;
+import com.stadyplanner.userservice.models.User;
 
-@Service
+import java.util.Optional;
+
 public interface UserServices {
+
+    User createUser(User user) ;
 }
