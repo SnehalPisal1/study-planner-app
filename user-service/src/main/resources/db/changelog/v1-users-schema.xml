@@ -1,6 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <databaseChangeLog
+            xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
 <changeSet id = "1" author="snehal-pisal">
-    <createTable tablename="users">
-        <column name="id" type = "BIGINT" autoIncrement="true">
+    <createTable tableName="users">
+        <column name="user_id" type = "BIGINT" autoIncrement="true">
             <constraints primaryKey="true"/>
         </column>
         <column name = "username" type="VARCHAR(255)">
@@ -9,7 +16,13 @@
         <column name = "password" type="VARCHAR(255)">
             <constraints nullable="false" />
         </column>
-        <column name = "roles" type="VARCHAR(255)"/>
+        <column name = "mail_id" type="VARCHAR(255)">
+            <constraints nullable="false" unique="true" />
+        </column>
+        <column name = "role" type="VARCHAR(255)"/>
+        <column name = "created_at" type="DATETIME"/>
+        <column name = "updated_at" type="DATETIME"/>
+
     </createTable>
 </changeSet>
-
+</databaseChangeLog>

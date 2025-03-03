@@ -45,14 +45,4 @@
             <constraints nullable="false"/>
         </column>
     </createTable>
-
-    <!-- Add Foreign Key Constraint for userId
-    <addForeignKeyConstraint
-            baseTableName="Tasks"
-            baseColumnNames="userId"
-            constraintName="fk_tasks_user"
-            referencedTableName="Users"
-            referencedColumnNames="userId"
-            onDelete="CASCADE"
-            onUpdate="CASCADE"/> -->
 </changeSet></databaseChangeLog>
