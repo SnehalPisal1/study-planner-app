@@ -31,4 +31,17 @@ public class UserController {
         }
     }
 
+
+    @GetMapping("/users/{username}")
+    public ResponseEntity<?> getUserByUsername(@Valid @PathVariable String username){
+        Optional<User> response = userServicesImpl.getUserByUsername(username);
+
+        if(response.isPresent()){
+            return ResponseEntity.ok(response.get());
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message","User not found"));
+        }
+    }
+
+
 }
