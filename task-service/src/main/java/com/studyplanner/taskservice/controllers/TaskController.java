@@ -1,5 +1,6 @@
 package com.studyplanner.taskservice.controllers;
 
+import com.studyplanner.taskservice.configs.JwtUtil;
 import com.studyplanner.taskservice.models.Task;
 import com.studyplanner.taskservice.services.TaskServicesImpl;
 import jakarta.validation.Valid;
@@ -16,9 +17,14 @@ public class TaskController {
     @Autowired
     TaskServicesImpl taskServicesImpl;
 
-    @PostMapping("/tasks")
-    public ResponseEntity<?> createTask(@RequestBody Task task){
+    @Autowired
+    JwtUtil jwtUtil;
 
+    @PostMapping("/tasks")
+    public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token){
+
+        String userName = extractUserNameFromToken(token);
+        task.setCreatedBy(userName);
         Task response = taskServicesImpl.createTask(task);
         if(response != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -32,6 +38,12 @@ public class TaskController {
                     .status(HttpStatus.BAD_REQUEST)
                     .body(errorResponse);
         }
+
+
+    }
+    private String extractUserNameFromToken(String token) {
+        String jwt = token.replace("Bearer ", "");
+        return jwtUtil.extractUsername(jwt);
     }
 
     @GetMapping("/tasks")
