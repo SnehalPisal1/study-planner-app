@@ -27,8 +27,7 @@
         </column>
 
         <!-- models.com.stadyplanner.userservice.controllers.User ID Column -->
-        <column name="user_id" type="BIGINT">
-            <constraints nullable="false"/>
+        <column name="created_by" type="VARCHAR(255)">
         </column>
 
         <!-- Due Date Column -->

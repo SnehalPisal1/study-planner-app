@@ -42,6 +42,6 @@ public class Task {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name="user_id")
-    private long userId;
+    @Column(name="created_by")
+    private String createdBy;
 }
