@@ -27,4 +27,8 @@ public class UserServicesImpl implements UserServices{
         LOGGER.info("Get User By Username : "+username);
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public void deleteUser(String username) {
+    }
 }

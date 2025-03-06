@@ -9,4 +9,6 @@ public interface UserServices {
     User createUser(User user) ;
 
     Optional<User> getUserByUsername(String username);
+
+    void deleteUser(String username);
 }
