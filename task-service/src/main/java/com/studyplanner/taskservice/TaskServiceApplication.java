@@ -35,9 +35,6 @@ public class TaskServiceApplication {
 
     public static void main(String[] args){
 
-        System.out.println("Executing com.studyplanner.taskservice.TaskServiceApplication....");
-
         SpringApplication.run(TaskServiceApplication.class, args);
-
     }
 }

@@ -1,6 +1,5 @@
 package com.studyplanner.authservice.services;
 
-import com.studyplanner.authservice.AuthServiceApplication;
 import com.studyplanner.authservice.dto.LoginRequest;
 import com.studyplanner.authservice.securityUtility.JwtUtil;
 import org.slf4j.LoggerFactory;

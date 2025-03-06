@@ -10,9 +10,6 @@ public class UserServiceApplication {
 
     public static void main(String[] str) {
 
-        System.out.println("Executing UserServiceApplication....");
-
         SpringApplication.run(UserServiceApplication.class, str);
-
     }
 }
