@@ -43,5 +43,11 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/users/{username}")
+    public ResponseEntity<?> deleteUser(@PathVariable String username){
+        userServicesImpl.deleteUser(username);
+        return null;
+    }
+
 
 }
