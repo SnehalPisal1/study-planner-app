@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,8 +46,21 @@ public class UserController {
 
     @DeleteMapping("/users/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable long userId){
-        userServicesImpl.deleteUser(userId);
-        return null;
+
+        boolean exists = userServicesImpl.findUser(userId);
+
+        Map<String, String> response = new HashMap<>();
+        if(!exists){
+            response.put("message","User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        else {
+            response.put("message","User successfully deleted");
+            userServicesImpl.deleteUser(userId);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        }
     }
 
     @PutMapping("/users/{userId}")
