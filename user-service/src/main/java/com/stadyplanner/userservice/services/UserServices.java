@@ -10,5 +10,5 @@ public interface UserServices {
 
     Optional<User> getUserByUsername(String username);
 
-    void deleteUser(String username);
+    void deleteUser(long userId);
 }

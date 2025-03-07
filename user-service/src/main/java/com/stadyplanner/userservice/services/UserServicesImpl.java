@@ -29,6 +29,6 @@ public class UserServicesImpl implements UserServices{
     }
 
     @Override
-    public void deleteUser(String username) {
+    public void deleteUser(long userId) {
     }
 }
