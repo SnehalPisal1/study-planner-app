@@ -31,4 +31,9 @@ public class UserServicesImpl implements UserServices{
     @Override
     public void deleteUser(long userId) {
     }
+
+    @Override
+    public User updateUser(long userId, User user) {
+        return null;
+    }
 }
