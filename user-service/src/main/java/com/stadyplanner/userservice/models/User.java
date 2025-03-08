@@ -1,5 +1,6 @@
 package com.stadyplanner.userservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "password")
 @Entity
 @Table(name = "users")
 public class User {
@@ -30,6 +31,7 @@ public class User {
 
     @NotNull
     @Column(name="password", nullable = false)
+    @JsonIgnore // Excludes password from ALL serialization (responses)
     private String password;
 
     @NotNull
