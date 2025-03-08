@@ -37,4 +37,9 @@ public class UserServicesImpl implements UserServices{
     public User updateUser(long userId, User user) {
         return null;
     }
+
+    @Override
+    public boolean findUser(long userId) {
+        return userRepository.existsById(userId);
+    }
 }

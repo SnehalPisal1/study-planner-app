@@ -15,4 +15,5 @@ public interface UserServices {
     User updateUser(long userId,User user);
 
 
+    boolean findUser(long userId);
 }
