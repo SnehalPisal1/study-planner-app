@@ -28,7 +28,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(Map.of("message","Invalid Input"));
         }
         } catch(Exception e){
-            return ResponseEntity.badRequest().body(Map.of("message", e));
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
     }
 
