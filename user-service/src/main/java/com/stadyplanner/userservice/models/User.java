@@ -1,6 +1,7 @@
 package com.stadyplanner.userservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -50,4 +51,9 @@ public class User {
     @UpdateTimestamp
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
+
+    @JsonProperty // Allows password to be set from the request
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
