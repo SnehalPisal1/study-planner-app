@@ -32,7 +32,6 @@ public class User {
 
     @NotNull
     @Column(name="password", nullable = false)
-    @JsonIgnore // Excludes password from ALL serialization (responses)
     private String password;
 
     @NotNull
@@ -51,6 +50,13 @@ public class User {
     @UpdateTimestamp
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
+
+    // Excludes password from ALL serialization (responses)
+    // Explicitly define the getter and annotate it with @JsonIgnore
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
 
     @JsonProperty // Allows password to be set from the request
     public void setPassword(String password) {
