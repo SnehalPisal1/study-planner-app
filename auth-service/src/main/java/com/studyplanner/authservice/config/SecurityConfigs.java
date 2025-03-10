@@ -41,8 +41,7 @@ public class SecurityConfigs {
 
     @Bean
     public PasswordEncoder passwordEncoder() throws Exception {
-        return NoOpPasswordEncoder.getInstance();
-       // return new BCryptPasswordEncoder();
+       return new BCryptPasswordEncoder();
     }
 
     //Authentication manager does not do authentication itself but delegated its to Authentication provider
