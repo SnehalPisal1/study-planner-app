@@ -47,8 +47,11 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<?> getAllTasks() {
-        List<Task> response = taskServicesImpl.getAllTasks();
+    public ResponseEntity<?> getAllTasks( @RequestHeader("Authorization") String token) {
+
+        String userName = extractUserNameFromToken(token);
+
+        List<Task> response = taskServicesImpl.getAllTasks(userName);
         if (response != null && !response.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } else {
