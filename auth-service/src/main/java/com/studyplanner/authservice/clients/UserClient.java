@@ -1,4 +1,4 @@
-package com.studyplanner.authservice.client;
+package com.studyplanner.authservice.clients;
 
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
