@@ -1,4 +1,4 @@
-package com.studyplanner.authservice.config;
+package com.studyplanner.authservice.configs;
 
 import com.studyplanner.authservice.securityUtility.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -29,7 +28,14 @@ public class SecurityConfigs {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**",
                                 "/actuator/**",
                                 "/health",
-                                "/info")
+                                "/info",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/index.html",
+                                "/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/v3/api-docs.yaml",
+                                "/api-docs.yaml")
                 .permitAll().anyRequest().authenticated())
                 .sessionManagement(session
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
