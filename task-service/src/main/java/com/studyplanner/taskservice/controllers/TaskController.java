@@ -6,12 +6,15 @@ import com.studyplanner.taskservice.services.TaskServicesImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Descriptor;
 import java.util.*;
 
 @RestController
+@Tag(name="Task Management API" , description = "API for managing tasks")
 public class TaskController {
 
     @Autowired
