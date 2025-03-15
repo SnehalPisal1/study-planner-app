@@ -2,6 +2,7 @@ package com.stadyplanner.userservice.controllers;
 
 import com.stadyplanner.userservice.models.User;
 import com.stadyplanner.userservice.services.UserServicesImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Tag(name="User Management API" , description = "API for managing users")
 @RestController
 public class UserController {
 
