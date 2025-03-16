@@ -3,6 +3,9 @@ package com.studyplanner.taskservice.controllers;
 import com.studyplanner.taskservice.configs.JwtUtil;
 import com.studyplanner.taskservice.models.Task;
 import com.studyplanner.taskservice.services.TaskServicesImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +27,13 @@ public class TaskController {
     JwtUtil jwtUtil;
 
     @PostMapping("/tasks")
+    @Operation(
+            summary = "Create a new task",
+            description = "Creates a task with due date"
+    )
+    @SecurityRequirement(name = "bearerAuth")
+    @ApiResponse(responseCode = "201", description = "Task created successfully")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
     public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token){
 
         String userName = extractUserNameFromToken(token);
