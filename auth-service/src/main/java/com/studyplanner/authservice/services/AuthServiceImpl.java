@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService{
             return ResponseEntity.ok(Map.of("AuthToken", token));
 
         }catch (BadCredentialsException e){
-           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message","Invalid username or password" + e));
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message","Invalid username or password - " + e));
         }
     }
 }
