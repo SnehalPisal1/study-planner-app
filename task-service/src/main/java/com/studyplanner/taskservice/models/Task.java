@@ -35,7 +35,7 @@ public class Task {
 
     @NotBlank(message = "Status is required")
     @Column(name="status")
-    private String status; //"To Do", "In Progress", "Done"
+    private TaskStatus status;
 
     @FutureOrPresent(message = "Due date must be in the future")
     @Column(name="due_date")
