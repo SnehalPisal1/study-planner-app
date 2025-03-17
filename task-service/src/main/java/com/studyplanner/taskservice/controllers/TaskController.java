@@ -34,8 +34,10 @@ public class TaskController {
     @SecurityRequirement(name = "bearerAuth")
     @ApiResponse(responseCode = "201", description = "Task created successfully")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "500", description = "Internal Server Error")
     public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token){
 
+        try{
         String userName = extractUserNameFromToken(token);
         task.setCreatedBy(userName);
         Task response = taskServicesImpl.createTask(task);
@@ -51,6 +53,10 @@ public class TaskController {
                     .status(HttpStatus.BAD_REQUEST)
                     .body(errorResponse);
         }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of("Message",e.getMessage()));
+
+        }
 
 
     }
@@ -59,6 +65,13 @@ public class TaskController {
         return jwtUtil.extractUsername(jwt);
     }
 
+    @Operation(
+            summary = "Get a all task",
+            description = "Get a all task for specified user"
+    )
+    @SecurityRequirement(name = "bearerAuth")
+    @ApiResponse(responseCode = "200", description = "Retrieve a list of all tasks")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
     @GetMapping("/tasks")
     public ResponseEntity<?> getAllTasks( @RequestHeader("Authorization") String token) {
 
