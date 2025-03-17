@@ -34,8 +34,9 @@ public class Task {
     private String description;
 
     @NotBlank(message = "Status is required")
+    @Enumerated(EnumType.STRING)
     @Column(name="status")
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.TO_DO;
 
     @FutureOrPresent(message = "Due date must be in the future")
     @Column(name="due_date")
