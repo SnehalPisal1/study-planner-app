@@ -7,19 +7,20 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.management.Descriptor;
 import java.util.*;
 
 @RestController
 @Tag(name = "Task Management API", description = "API for managing tasks")
 public class TaskController {
 
+    public static Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
     @Autowired
     TaskServicesImpl taskServicesImpl;
 
@@ -43,9 +44,7 @@ public class TaskController {
             if (response != null) {
                 return ResponseEntity.status(HttpStatus.CREATED).body(response);
             } else {
-
                 Map<String, String> errorResponse = new HashMap<>();
-
                 errorResponse.put("message", "Failed to create task. Please check your input.");
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
@@ -69,16 +68,12 @@ public class TaskController {
 
         try {
             String userName = extractUserNameFromToken(token);
-
             List<Task> response = taskServicesImpl.getAllTasks(userName);
             if (response != null && !response.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             } else {
-
                 Map<String, String> errorResponse = new HashMap<>();
-
                 errorResponse.put("message", "Tasks Not Found");
-
                 return ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
                         .body(errorResponse);
@@ -86,15 +81,13 @@ public class TaskController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
         }
-
     }
 
     @DeleteMapping("/tasks/{taskId}")
-    public ResponseEntity<?> deleteTask(@PathVariable long taskId) {
+    public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestHeader("Authorization") String token) {
 
         try {
             boolean exists = taskServicesImpl.findTask(taskId);
-
             Map<String, String> response = new HashMap<>();
             if (!exists) {
                 response.put("message", "TASK not found");
@@ -111,8 +104,14 @@ public class TaskController {
     }
 
     @PutMapping("/tasks/{taskId}")
-    public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task) {
+    public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task,
+                                        @RequestHeader("Authorization") String token) {
         try {
+                // Check authentication first
+                if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body(Map.of("message", "Authentication required"));
+                }
             // Ensure the path ID matches the task ID to prevent confusion
             if (!taskId.equals(task.getTaskId())) {
                 return ResponseEntity.badRequest()
