@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 
 @RestController
@@ -107,15 +108,10 @@ public class TaskController {
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task,
                                         @RequestHeader("Authorization") String token) {
         try {
-                // Check authentication first
-                if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                            .body(Map.of("message", "Authentication required"));
-                }
-            // Ensure the path ID matches the task ID to prevent confusion
-            if (!taskId.equals(task.getTaskId())) {
-                return ResponseEntity.badRequest()
-                        .body(Map.of("message", "Task ID in path does not match task ID in request body"));
+            // Check authentication first
+            if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("message", "Authentication required"));
             }
 
             if (!taskServicesImpl.findTask(taskId)) {
