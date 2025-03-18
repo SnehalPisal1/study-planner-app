@@ -64,6 +64,7 @@ public class TaskController {
     @SecurityRequirement(name = "bearerAuth")
     @ApiResponse(responseCode = "200", description = "Retrieve a list of all tasks")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @GetMapping("/tasks")
     public ResponseEntity<?> getAllTasks(@RequestHeader("Authorization") String token) {
 
@@ -84,6 +85,14 @@ public class TaskController {
         }
     }
 
+    @Operation(
+            summary = "Delete task ",
+            description = "Delete task from task List"
+    )
+    @SecurityRequirement(name = "bearerAuth")
+    @ApiResponse(responseCode = "200", description = "Task deleted successfully")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @DeleteMapping("/tasks/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestHeader("Authorization") String token) {
 
