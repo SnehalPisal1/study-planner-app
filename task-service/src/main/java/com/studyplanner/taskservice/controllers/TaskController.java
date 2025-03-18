@@ -17,7 +17,7 @@ import javax.management.Descriptor;
 import java.util.*;
 
 @RestController
-@Tag(name="Task Management API" , description = "API for managing tasks")
+@Tag(name = "Task Management API", description = "API for managing tasks")
 public class TaskController {
 
     @Autowired
@@ -35,34 +35,26 @@ public class TaskController {
     @ApiResponse(responseCode = "201", description = "Task created successfully")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token){
+    public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token) {
+        try {
+            String userName = extractUserNameFromToken(token);
+            task.setCreatedBy(userName);
+            Task response = taskServicesImpl.createTask(task);
+            if (response != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            } else {
 
-        try{
-        String userName = extractUserNameFromToken(token);
-        task.setCreatedBy(userName);
-        Task response = taskServicesImpl.createTask(task);
-        if(response != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        }
-        else {
+                Map<String, String> errorResponse = new HashMap<>();
 
-            Map<String,String> errorResponse= new HashMap<>();
-
-            errorResponse.put("message" ,"Failed to create task. Please check your input.");
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(errorResponse);
-        }
+                errorResponse.put("message", "Failed to create task. Please check your input.");
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(errorResponse);
+            }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(Map.of("Message",e.getMessage()));
+            return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
 
         }
-
-
-    }
-    private String extractUserNameFromToken(String token) {
-        String jwt = token.replace("Bearer ", "");
-        return jwtUtil.extractUsername(jwt);
     }
 
     @Operation(
@@ -73,42 +65,47 @@ public class TaskController {
     @ApiResponse(responseCode = "200", description = "Retrieve a list of all tasks")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @GetMapping("/tasks")
-    public ResponseEntity<?> getAllTasks( @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> getAllTasks(@RequestHeader("Authorization") String token) {
 
-        String userName = extractUserNameFromToken(token);
+        try {
+            String userName = extractUserNameFromToken(token);
 
-        List<Task> response = taskServicesImpl.getAllTasks(userName);
-        if (response != null && !response.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } else {
+            List<Task> response = taskServicesImpl.getAllTasks(userName);
+            if (response != null && !response.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            } else {
 
-            Map<String, String> errorResponse = new HashMap<>();
+                Map<String, String> errorResponse = new HashMap<>();
 
-            errorResponse.put("message", "Tasks Not Found");
+                errorResponse.put("message", "Tasks Not Found");
 
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(errorResponse);
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(errorResponse);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
         }
 
     }
 
     @DeleteMapping("/tasks/{taskId}")
-    public ResponseEntity<?> deleteTask(@PathVariable long taskId){
+    public ResponseEntity<?> deleteTask(@PathVariable long taskId) {
 
-        boolean exists = taskServicesImpl.findTask(taskId);
+        try {
+            boolean exists = taskServicesImpl.findTask(taskId);
 
-        Map<String, String> response = new HashMap<>();
-        if(!exists){
-            response.put("message","TASK not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-
-        else {
-            response.put("message","TASK SUCCESSFULLY DELETED");
-            taskServicesImpl.deleteTask(taskId);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-
+            Map<String, String> response = new HashMap<>();
+            if (!exists) {
+                response.put("message", "TASK not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            } else {
+                response.put("message", "TASK SUCCESSFULLY DELETED");
+                taskServicesImpl.deleteTask(taskId);
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
         }
 
     }
@@ -122,7 +119,7 @@ public class TaskController {
                         .body(Map.of("message", "Task ID in path does not match task ID in request body"));
             }
 
-            if(!taskServicesImpl.findTask(taskId)){
+            if (!taskServicesImpl.findTask(taskId)) {
                 return ResponseEntity.badRequest()
                         .body(Map.of("message", "Incorrect Task ID"));
             }
@@ -139,5 +136,10 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("message", "Error updating task: " + e.getMessage()));
         }
+    }
+
+    private String extractUserNameFromToken(String token) {
+        String jwt = token.replace("Bearer ", "");
+        return jwtUtil.extractUsername(jwt);
     }
 }
