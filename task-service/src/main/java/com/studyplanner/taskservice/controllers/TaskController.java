@@ -97,6 +97,12 @@ public class TaskController {
     public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestHeader("Authorization") String token) {
 
         try {
+            // Check authentication first
+            if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("message", "Authentication required"));
+            }
+
             boolean exists = taskServicesImpl.findTask(taskId);
             Map<String, String> response = new HashMap<>();
             if (!exists) {
