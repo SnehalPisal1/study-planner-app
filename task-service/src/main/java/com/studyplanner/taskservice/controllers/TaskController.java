@@ -113,6 +113,14 @@ public class TaskController {
 
     }
 
+    @Operation(
+            summary = "Update an existing task",
+            description = "Modify task details such as title, description, due date, or status using the task's unique ID. Returns the updated task."
+    )
+    @SecurityRequirement(name = "bearerAuth")
+    @ApiResponse(responseCode = "200", description = "Task updated successfully")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @PutMapping("/tasks/{taskId}")
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task,
                                         @RequestHeader("Authorization") String token) {
