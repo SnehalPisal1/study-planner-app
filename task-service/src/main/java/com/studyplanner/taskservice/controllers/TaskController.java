@@ -69,6 +69,12 @@ public class TaskController {
     public ResponseEntity<?> getAllTasks(@RequestHeader("Authorization") String token) {
 
         try {
+            // Check authentication first
+            if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("message", "Authentication required"));
+            }
+
             String userName = extractUserNameFromToken(token);
             List<Task> response = taskServicesImpl.getAllTasks(userName);
             if (response != null && !response.isEmpty()) {
