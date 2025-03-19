@@ -36,6 +36,7 @@ public class TaskController {
     )
     @ApiResponse(responseCode = "201", description = "Task created successfully")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "400", description = "Bad Request")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
     public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token) {
         try {
@@ -95,6 +96,7 @@ public class TaskController {
     )
     @ApiResponse(responseCode = "200", description = "Task deleted successfully")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "404", description = "Task not found")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @DeleteMapping("/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestHeader("Authorization") String token) {
@@ -109,7 +111,7 @@ public class TaskController {
             boolean exists = taskServicesImpl.findTask(taskId);
             Map<String, String> response = new HashMap<>();
             if (!exists) {
-                response.put("message", "TASK not found");
+                response.put("message", "Task not found");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             } else {
                 response.put("message", "TASK SUCCESSFULLY DELETED");
@@ -128,6 +130,8 @@ public class TaskController {
     )
     @ApiResponse(responseCode = "200", description = "Task updated successfully")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "404", description = "Task not found")
+    @ApiResponse(responseCode = "400", description = "Bad Request")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @PutMapping("/{taskId}")
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task,
