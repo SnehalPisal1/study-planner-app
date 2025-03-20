@@ -30,6 +30,7 @@ public class TaskController {
     @Autowired
     JwtUtil jwtUtil;
 
+    @PostMapping
     @Operation(
             summary = "Create a new task",
             description = "Creates a task with due date"
@@ -58,6 +59,7 @@ public class TaskController {
         }
     }
 
+    @GetMapping
     @Operation(
             summary = "Get a all task",
             description = "Get a all task for specified user"
@@ -90,6 +92,7 @@ public class TaskController {
         }
     }
 
+    @DeleteMapping("/{taskId}")
     @Operation(
             summary = "Delete task ",
             description = "Delete task from task List"
@@ -124,6 +127,7 @@ public class TaskController {
 
     }
 
+    @PutMapping("/{taskId}")
     @Operation(
             summary = "Update an existing task",
             description = "Modify task details such as title, description, due date, or status using the task's unique ID. Returns the updated task."
