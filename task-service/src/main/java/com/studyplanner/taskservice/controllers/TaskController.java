@@ -152,6 +152,7 @@ public class TaskController {
                         .body(Map.of("message", "Incorrect Task ID"));
             }
 
+            task.setTaskId(taskId);
             Task updatedTask = taskServicesImpl.updateTask(task);
 
             if (updatedTask != null) {

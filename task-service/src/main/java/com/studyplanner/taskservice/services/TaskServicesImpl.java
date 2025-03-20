@@ -39,9 +39,7 @@ public class TaskServicesImpl implements TaskServices {
     @Transactional
     public Task updateTask(Task task) {
 
-       long taskId= task.getTaskId();
-
-       Optional<Task> optional= taskRepository.findById(taskId);
+       Optional<Task> optional= taskRepository.findById(task.getTaskId());
 
        if(optional.isPresent()){
 
