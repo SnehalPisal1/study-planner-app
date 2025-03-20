@@ -1,4 +1,4 @@
-package com.studyplanner.taskservice.configs;
+package com.studyplanner.taskservice.SecurityUtility;
 
 
 import io.jsonwebtoken.*;
