@@ -1,6 +1,6 @@
 package com.studyplanner.taskservice.controllers;
 
-import com.studyplanner.taskservice.configs.JwtUtil;
+import com.studyplanner.taskservice.SecurityUtility.JwtUtil;
 import com.studyplanner.taskservice.models.Task;
 import com.studyplanner.taskservice.services.TaskServicesImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -101,16 +103,13 @@ public class TaskController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "404", description = "Task not found")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    @DeleteMapping("/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestHeader("Authorization") String token) {
-
         try {
             // Check authentication first
             if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(Map.of("message", "Authentication required"));
             }
-
             boolean exists = taskServicesImpl.findTask(taskId);
             Map<String, String> response = new HashMap<>();
             if (!exists) {
@@ -124,7 +123,6 @@ public class TaskController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
         }
-
     }
 
     @PutMapping("/{taskId}")
@@ -137,15 +135,8 @@ public class TaskController {
     @ApiResponse(responseCode = "404", description = "Task not found")
     @ApiResponse(responseCode = "400", description = "Bad Request")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    @PutMapping("/{taskId}")
-    public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task,
-                                        @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task) {
         try {
-            // Check authentication first
-            if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("message", "Authentication required"));
-            }
 
             if (!taskServicesImpl.findTask(taskId)) {
                 return ResponseEntity.badRequest()
