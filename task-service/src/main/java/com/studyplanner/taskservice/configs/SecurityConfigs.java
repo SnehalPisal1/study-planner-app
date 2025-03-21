@@ -6,43 +6,56 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfigs {
 
     @Autowired
-    JwtAuthFilter jwtAuthFilter;
+    private JwtAuthenticationEntryPointUtil jwtAuthEntryPoint;
 
     @Autowired
-    AuthenticationEntryPoint jwtAuthEntryPoint;
+    private JwtAuthFilter jwtAuthFilter;
 
     //use filter chain to intercept request, enforce security rules and manages sessions or tokens
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.
-                 csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/tasks/**").authenticated() // Require auth for /tasks
+        logger.info("Inside security configs...");
+
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**",
+                                "/actuator/**",
+                                "/health",
+                                "/info",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/v3/api-docs.yaml",
+                                "/api-docs.yaml")
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
-                .exceptionHandling(exc
-                        -> exc.authenticationEntryPoint(jwtAuthEntryPoint))
-                .sessionManagement(session
-                        -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .exceptionHandling(exception ->
+                        exception.authenticationEntryPoint(jwtAuthEntryPoint)
+                )
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                ;
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
+        return http.build();
     }
 
     @Bean
