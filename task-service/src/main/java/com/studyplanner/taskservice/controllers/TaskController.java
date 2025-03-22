@@ -101,13 +101,8 @@ public class TaskController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "404", description = "Task not found")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> deleteTask(@PathVariable long taskId) {
         try {
-            // Check authentication first
-            if (token == null || token.isEmpty() || !jwtUtil.validateToken(token)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("message", "Authentication required"));
-            }
             boolean exists = taskServicesImpl.findTask(taskId);
             Map<String, String> response = new HashMap<>();
             if (!exists) {
