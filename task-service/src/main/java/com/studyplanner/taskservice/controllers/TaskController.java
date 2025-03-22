@@ -41,9 +41,10 @@ public class TaskController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "400", description = "Bad Request")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    public ResponseEntity<?> createTask(@RequestBody Task task, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> createTask(@RequestBody Task task) {
         try {
-            String userName = extractUserNameFromToken(token);
+            Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+            String userName = auth.getName();
             task.setCreatedBy(userName);
             Task response = taskServicesImpl.createTask(task);
             if (response != null) {
