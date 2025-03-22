@@ -148,9 +148,4 @@ public class TaskController {
                     .body(Map.of("message", "Error updating task: " + e.getMessage()));
         }
     }
-
-    private String extractUserNameFromToken(String token) {
-        String jwt = token.replace("Bearer ", "");
-        return jwtUtil.extractUsername(jwt);
-    }
 }
