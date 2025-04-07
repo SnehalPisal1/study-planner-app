@@ -13,13 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
+@EnableAsync
 @RequestMapping("/tasks")
 @Tag(name = "Task Management API", description = "API for managing tasks")
 @SecurityRequirement(name = "bearerAuth")
@@ -27,10 +30,10 @@ public class TaskController {
 
     public static Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
     @Autowired
-    TaskServicesImpl taskServicesImpl;
+    private TaskServicesImpl taskServicesImpl;
 
     @Autowired
-    JwtUtil jwtUtil;
+    private JwtUtil jwtUtil;
 
     @PostMapping
     @Operation(
@@ -74,8 +77,9 @@ public class TaskController {
 
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String userName =  auth.getName();;
-            List<Task> response = taskServicesImpl.getAllTasks(userName);
+            String userName =  auth.getName();
+            CompletableFuture<List<Task>> completedFuture = taskServicesImpl.getAllTasks(userName);
+            List<Task> response = completedFuture.get();
             if (response != null && !response.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             } else {
