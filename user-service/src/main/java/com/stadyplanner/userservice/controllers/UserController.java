@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    UserServicesImpl userServicesImpl;
+    private UserServicesImpl userServicesImpl;
 
     @PostMapping("/users")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user){
