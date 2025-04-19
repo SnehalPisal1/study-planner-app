@@ -47,7 +47,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable long userId){
 
         boolean exists = userServicesImpl.findUser(userId);
