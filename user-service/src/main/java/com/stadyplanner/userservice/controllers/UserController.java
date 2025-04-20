@@ -66,7 +66,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable long userId, @Valid @RequestBody User user){
         User response= userServicesImpl.updateUser(userId,user);
         return null;
