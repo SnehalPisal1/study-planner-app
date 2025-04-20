@@ -29,8 +29,13 @@ import java.util.concurrent.CompletableFuture;
 public class TaskController {
 
     public static Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
-    @Autowired
-    private TaskServicesImpl taskServicesImpl;
+
+    private final TaskServices taskService;
+
+    @Autowired  // Constructor injection is preferred
+    public TaskController(TaskServices taskService) {
+        this.taskService = taskService;
+    }
 
     @Autowired
     private JwtUtil jwtUtil;
