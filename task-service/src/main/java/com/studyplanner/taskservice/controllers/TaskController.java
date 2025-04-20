@@ -54,7 +54,7 @@ public class TaskController {
             Authentication auth= SecurityContextHolder.getContext().getAuthentication();
             String userName = auth.getName();
             task.setCreatedBy(userName);
-            Task response = taskServicesImpl.createTask(task);
+            Task response = taskService.createTask(task);
             if (response != null) {
                 return ResponseEntity.status(HttpStatus.CREATED).body(response);
             } else {
