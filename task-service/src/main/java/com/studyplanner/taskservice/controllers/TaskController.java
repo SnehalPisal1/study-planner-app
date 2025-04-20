@@ -2,7 +2,7 @@ package com.studyplanner.taskservice.controllers;
 
 import com.studyplanner.taskservice.SecurityUtility.JwtUtil;
 import com.studyplanner.taskservice.models.Task;
-import com.studyplanner.taskservice.services.TaskServicesImpl;
+import com.studyplanner.taskservice.services.TaskServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
