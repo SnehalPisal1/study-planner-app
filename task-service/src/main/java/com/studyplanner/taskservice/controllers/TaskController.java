@@ -117,7 +117,7 @@ public class TaskController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             } else {
                 response.put("message", "TASK SUCCESSFULLY DELETED");
-                taskServicesImpl.deleteTask(taskId);
+                taskService.deleteTask(taskId);
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             }
         } catch (Exception e) {
