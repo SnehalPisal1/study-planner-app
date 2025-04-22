@@ -21,7 +21,9 @@ public class UserController {
     private final UserServices userService;
 
     @Autowired
-    private UserServicesImpl userServicesImpl;
+    public UserController(UserServices userService){
+        this.userService=userService;
+    }
 
     @PostMapping
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user){
