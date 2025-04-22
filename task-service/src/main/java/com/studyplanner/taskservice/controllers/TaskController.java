@@ -144,7 +144,7 @@ public class TaskController {
             }
 
             task.setTaskId(taskId);
-            Task updatedTask = taskServicesImpl.updateTask(task);
+            Task updatedTask = taskService.updateTask(task);
 
             if (updatedTask != null) {
                 return ResponseEntity.ok(updatedTask);
