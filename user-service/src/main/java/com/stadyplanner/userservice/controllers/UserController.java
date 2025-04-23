@@ -65,7 +65,7 @@ public class UserController {
 
         else {
             response.put("message","User successfully deleted");
-            userServicesImpl.deleteUser(userId);
+            userService.deleteUser(userId);
             return ResponseEntity.status(HttpStatus.OK).body(response);
 
         }
