@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     public ResponseEntity<?> getUserByUsername(@Valid @PathVariable String username){
-        Optional<User> response = userServicesImpl.getUserByUsername(username);
+        Optional<User> response = userService.getUserByUsername(username);
 
         if(response.isPresent()){
             return ResponseEntity.ok(response.get());
@@ -55,7 +55,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable long userId){
 
-        boolean exists = userServicesImpl.findUser(userId);
+        boolean exists = userService.findUser(userId);
 
         Map<String, String> response = new HashMap<>();
         if(!exists){
