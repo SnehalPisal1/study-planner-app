@@ -23,7 +23,9 @@ public class AuthController {
     private final AuthService authService;
 
     @Autowired
-    AuthServiceImpl authServiceImpl;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     //login
     @Operation(summary = "Authenticate user", description = "Authenticates a user and returns JWT token")
