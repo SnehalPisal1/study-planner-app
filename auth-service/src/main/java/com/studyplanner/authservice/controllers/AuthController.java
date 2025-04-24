@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Authentication", description = "Authentication API")
 public class AuthController {
 
+    private final AuthService authService;
+
     @Autowired
     AuthServiceImpl authServiceImpl;
 
