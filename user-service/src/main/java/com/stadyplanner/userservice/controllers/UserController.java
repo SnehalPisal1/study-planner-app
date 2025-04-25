@@ -73,8 +73,12 @@ public class UserController {
 
     @PutMapping("/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable long userId, @Valid @RequestBody User user){
-        User response= userService.updateUser(userId,user);
-        return null;
+        try {
+            User response = userService.updateUser(userId, user);
+            return null;
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
+        }
     }
 
 }
