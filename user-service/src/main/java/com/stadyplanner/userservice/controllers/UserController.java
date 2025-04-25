@@ -75,7 +75,7 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable long userId, @Valid @RequestBody User user){
         try {
             User response = userService.updateUser(userId, user);
-            return null;
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
         }
