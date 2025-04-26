@@ -58,16 +58,14 @@ public class UserController {
         try {
             boolean exists = userService.findUser(userId);
 
-        Map<String, String> response = new HashMap<>();
-        if(!exists){
-            response.put("message","User not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-
-        else {
-            response.put("message","User successfully deleted");
-            userService.deleteUser(userId);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            Map<String, String> response = new HashMap<>();
+            if (!exists) {
+                response.put("message", "User not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            } else {
+                response.put("message", "User successfully deleted");
+                userService.deleteUser(userId);
+                return ResponseEntity.status(HttpStatus.OK).body(response);
 
         }
     }
