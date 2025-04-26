@@ -67,7 +67,10 @@ public class UserController {
                 userService.deleteUser(userId);
                 return ResponseEntity.status(HttpStatus.OK).body(response);
 
-        }
+            }
+        } catch (Exception e) {
+        return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
+    }
     }
 
     @PutMapping("/{userId}")
