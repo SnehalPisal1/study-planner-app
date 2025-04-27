@@ -39,6 +39,10 @@ public class AuthController {
     })
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
-        return authService.login(loginRequest);
+        try {
+            return authService.login(loginRequest);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
+        }
     }
 }
