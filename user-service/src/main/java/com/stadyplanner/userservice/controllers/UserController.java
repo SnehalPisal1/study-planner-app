@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 public class UserController {
 
-    private final UserServices userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserServices userService){
