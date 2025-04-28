@@ -32,7 +32,7 @@ public class TaskController {
 
     private final TaskServices taskService;
 
-    @Autowired  // Constructor injection is preferred
+    @Autowired
     public TaskController(TaskServices taskService) {
         this.taskService = taskService;
     }
