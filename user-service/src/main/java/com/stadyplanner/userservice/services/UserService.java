@@ -4,7 +4,7 @@ import com.stadyplanner.userservice.models.User;
 
 import java.util.Optional;
 
-public interface UserServices {
+public interface UserService {
 
     User createUser(User user) ;
 
