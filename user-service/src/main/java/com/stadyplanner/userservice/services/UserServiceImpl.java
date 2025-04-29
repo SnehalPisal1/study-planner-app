@@ -1,6 +1,5 @@
 package com.stadyplanner.userservice.services;
 
-import com.stadyplanner.userservice.models.Role;
 import com.stadyplanner.userservice.models.User;
 import com.stadyplanner.userservice.repositories.UserRepository;
 import org.slf4j.Logger;
