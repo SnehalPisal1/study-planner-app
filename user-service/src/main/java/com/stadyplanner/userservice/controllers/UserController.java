@@ -1,8 +1,7 @@
 package com.stadyplanner.userservice.controllers;
 
 import com.stadyplanner.userservice.models.User;
-import com.stadyplanner.userservice.services.UserServices;
-import com.stadyplanner.userservice.services.UserServicesImpl;
+import com.stadyplanner.userservice.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
