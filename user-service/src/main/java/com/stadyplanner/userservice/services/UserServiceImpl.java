@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserServicesImpl implements UserServices{
+public class UserServiceImpl implements UserService {
 
     private final static Logger LOGGER= LoggerFactory.getLogger(UserServicesImpl.class);
 
