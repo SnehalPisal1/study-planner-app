@@ -14,6 +14,8 @@ import java.util.Optional;
 @Service
 public class TaskServicesImpl implements TaskServices {
 
+    public static Logger logger = LoggerFactory.getLogger(TaskServicesImpl.class);
+
     @Autowired
     TaskRepository taskRepository;
 
