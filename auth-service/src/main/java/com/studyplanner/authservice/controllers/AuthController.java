@@ -2,7 +2,6 @@ package com.studyplanner.authservice.controllers;
 
 import com.studyplanner.authservice.dto.LoginRequest;
 import com.studyplanner.authservice.services.AuthService;
-import com.studyplanner.authservice.services.AuthServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
