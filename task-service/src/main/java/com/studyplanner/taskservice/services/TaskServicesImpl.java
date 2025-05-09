@@ -5,11 +5,16 @@ import com.studyplanner.taskservice.repositories.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class TaskServicesImpl implements TaskServices {
@@ -24,9 +29,20 @@ public class TaskServicesImpl implements TaskServices {
        return taskRepository.save(task);
     }
 
+    @Async("taskExecutor")
     @Override
-    public List<Task> getAllTasks(String userName) {
-        return taskRepository.findByCreatedBy(userName);
+    public CompletableFuture<List<Task>> getAllTasks(String userName) {
+        logger.info("Executing - "+Thread.currentThread().getName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        logger.info("SecurityContext in async thread: {}", auth);
+
+        if (auth == null) {
+            logger.error("SecurityContext is null in async call! Rejecting request.");
+            throw new AuthenticationException("Security context lost in async execution") {};
+        }
+
+        return CompletableFuture.completedFuture(taskRepository.findByCreatedBy(userName));
     }
 
     @Override

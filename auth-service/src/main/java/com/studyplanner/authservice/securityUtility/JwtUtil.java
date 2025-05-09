@@ -27,7 +27,7 @@ public class JwtUtil {
                     .setClaims( new HashMap<>())
                     .setSubject(username)
                     .setIssuedAt(new Date(System.currentTimeMillis()))
-                    .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+                    .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000* 30 *60)) // expiration value from properties is 86400
                     .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                     .compact();
         }
