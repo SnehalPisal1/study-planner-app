@@ -83,7 +83,7 @@ public class TaskController {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String userName =  auth.getName();
-            CompletableFuture<List<Task>> completedFuture = taskServicesImpl.getAllTasks(userName);
+            CompletableFuture<List<Task>> completedFuture = taskService.getAllTasks(userName);
             List<Task> response = completedFuture.get();
             if (response != null && !response.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.OK).body(response);
