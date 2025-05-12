@@ -17,4 +17,10 @@ public class TaskTest {
     public void testGetAllTask(){
 
     }
+
+
+    @Test
+    public void testDeleteTask(){
+
+    }
 }
