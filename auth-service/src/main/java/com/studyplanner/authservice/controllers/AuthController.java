@@ -28,7 +28,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-    //login
     @Operation(summary = "Authenticate user", description = "Authenticates a user and returns JWT token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully authenticated",
