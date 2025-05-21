@@ -63,7 +63,6 @@ public class TaskController {
             }
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Map.of("Message", e.getMessage()));
-
         }
     }
 
