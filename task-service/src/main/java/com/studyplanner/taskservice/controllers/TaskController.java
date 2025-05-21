@@ -27,8 +27,6 @@ import java.util.*;
 @SecurityRequirement(name = "bearerAuth")
 public class TaskController {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
-
     private final TaskServices taskService;
 
     @Autowired
