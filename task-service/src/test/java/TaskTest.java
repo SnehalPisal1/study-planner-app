@@ -8,6 +8,7 @@ import static com.studyplanner.taskservice.models.TaskStatus.IN_PROGRESS;
 public class TaskTest {
 
 
+    //success
     @Test
     public void testCreateTask(){
 
