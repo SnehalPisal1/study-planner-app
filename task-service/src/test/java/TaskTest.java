@@ -18,7 +18,8 @@ public class TaskTest {
     @Mock
     private TaskServices taskService;
 
-
+    @InjectMocks
+    private TaskController taskController;
     //success
     @Test
     public void testCreateTask(){
