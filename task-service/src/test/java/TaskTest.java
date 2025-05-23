@@ -1,3 +1,4 @@
+import com.studyplanner.taskservice.controllers.TaskController;
 import com.studyplanner.taskservice.models.Task;
 import org.junit.jupiter.api.Test;
 
