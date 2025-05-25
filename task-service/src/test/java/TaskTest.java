@@ -21,10 +21,17 @@ public class TaskTest {
     @InjectMocks
     private TaskController taskController;
     //success
-    @Test
-    public void testCreateTask(){
 
-    }
+        @Test
+        public void testCreateTask_Success() {
+            Task task = new Task();
+            task.setTaskId(2L);
+            task.setDescription("Second Description");
+            task.setDueDate(LocalDateTime.now().plusDays(2));
+            task.setStatus(IN_PROGRESS);
+            task.setCreatedBy("testUser");
+            task.setCreatedAt(LocalDateTime.now());
+            }
 
     @Test
     public void testUpdateTask(){
