@@ -1,6 +1,7 @@
 import com.studyplanner.taskservice.controllers.TaskController;
 import com.studyplanner.taskservice.models.Task;
 import com.studyplanner.taskservice.services.TaskServices;
+import jakarta.validation.ValidationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +35,10 @@ public class TaskTest {
             // Arrange
             //   Task task = new Task("Complete project", "Finish by Friday", false);
             Task savedTask = new Task(1L, "Complete project", "Finish by Friday", false, "testuser");
-            }
+            when(taskService.createTask(any(Task.class))).thenReturn(savedTask);
+
+
+        }
 
     @Test
     public void testUpdateTask(){
