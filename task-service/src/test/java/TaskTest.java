@@ -31,6 +31,9 @@ public class TaskTest {
             task.setStatus(IN_PROGRESS);
             task.setCreatedBy("testUser");
             task.setCreatedAt(LocalDateTime.now());
+            // Arrange
+            //   Task task = new Task("Complete project", "Finish by Friday", false);
+            Task savedTask = new Task(1L, "Complete project", "Finish by Friday", false, "testuser");
             }
 
     @Test
