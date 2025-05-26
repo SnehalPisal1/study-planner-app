@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 
 import static com.studyplanner.taskservice.models.TaskStatus.IN_PROGRESS;
 
+@ExtendWith(MockitoExtension.class)
 public class TaskTest {
 
     @Mock
