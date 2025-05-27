@@ -18,7 +18,7 @@ import static com.studyplanner.taskservice.models.TaskStatus.IN_PROGRESS;
 public class TaskTest {
 
     @Mock
-    private TaskServices taskService;
+    private TaskRepository taskRepository;
 
     @InjectMocks
     private TaskController taskController;
