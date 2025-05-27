@@ -28,8 +28,8 @@ public class TaskTest {
         public void testCreateTask_Success() {
             //Arrange
             Task task = new Task();
-            task.setTaskId(2L);
-            task.setDescription("Second Description");
+            task.setTaskName("Java");
+            task.setDescription("Java version - 8");
             task.setDueDate(LocalDateTime.now().plusDays(2));
             task.setStatus(IN_PROGRESS);
             task.setCreatedBy("testUser");
