@@ -34,11 +34,17 @@ public class TaskTest {
             task.setStatus(IN_PROGRESS);
             task.setCreatedBy("testUser");
             task.setCreatedAt(LocalDateTime.now());
-            // Arrange
-            //   Task task = new Task("Complete project", "Finish by Friday", false);
-            Task savedTask = new Task(1L, "Complete project", "Finish by Friday", false, "testuser");
-            when(taskService.createTask(any(Task.class))).thenReturn(savedTask);
 
+            //Arrange response
+
+            Task savedTask = new Task();
+            savedTask.setTaskId(1L);
+            savedTask.setTaskName("Java");
+            savedTask.setDescription("Java version - 8");
+            savedTask.setDueDate(LocalDateTime.now().plusDays(2));
+            savedTask.setStatus(IN_PROGRESS);
+            savedTask.setCreatedBy("testUser");
+            savedTask.setCreatedAt(LocalDateTime.now());
 
         }
 
