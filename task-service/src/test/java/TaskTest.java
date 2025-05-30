@@ -36,7 +36,6 @@ public class TaskTest {
             task.setCreatedAt(LocalDateTime.now());
 
             //Arrange response
-
             Task savedTask = new Task();
             savedTask.setTaskId(1L);
             savedTask.setTaskName("Java");
