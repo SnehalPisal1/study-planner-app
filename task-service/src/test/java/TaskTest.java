@@ -45,8 +45,8 @@ public class TaskTest {
             savedTask.setCreatedBy("testUser");
             savedTask.setCreatedAt(LocalDateTime.now());
 
-        }
-
+            when(taskRepository.save(any(Task.class))).thenReturn(savedTask);
+           }
     @Test
     public void testUpdateTask(){
 
