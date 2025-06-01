@@ -53,7 +53,9 @@ public class TaskTest {
 
             // Assert
             assertNotNull(response);
+            assertEquals(savedTask.getTaskId(), response.getTaskId());
         }
+
     @Test
     public void testUpdateTask(){
 
