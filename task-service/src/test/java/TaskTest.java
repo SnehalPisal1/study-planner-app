@@ -55,7 +55,8 @@ public class TaskTest {
             assertNotNull(response);
             assertEquals(savedTask.getTaskId(), response.getTaskId());
             assertEquals(savedTask.getTaskName(), response.getTaskName());
-
+            assertEquals(savedTask.getCreatedBy(), response.getCreatedBy());
+            assertEquals(savedTask.getStatus(), response.getStatus());
         }
 
     @Test
