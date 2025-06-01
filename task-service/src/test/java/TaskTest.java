@@ -49,6 +49,10 @@ public class TaskTest {
 
             // Act
             Task response = taskServiceImpl.createTask(task);
+
+
+            // Assert
+            assertNotNull(response);
         }
     @Test
     public void testUpdateTask(){
