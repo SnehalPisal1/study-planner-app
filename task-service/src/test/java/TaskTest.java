@@ -23,9 +23,8 @@ public class TaskTest {
     @InjectMocks
     private TaskServicesImpl taskServiceImpl;
 
-
-        @Test
-        public void testCreateTask_Success() {
+     @Test
+     public void testCreateTask_Success() {
             //Arrange input
             Task task = new Task();
             task.setTaskName("Java");
