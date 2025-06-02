@@ -34,15 +34,15 @@ public class TaskTest {
         task.setCreatedBy("testUser");
         task.setCreatedAt(LocalDateTime.now());
 
-            //Arrange response
-            Task savedTask = new Task();
-            savedTask.setTaskId(1L);
-            savedTask.setTaskName("Java");
-            savedTask.setDescription("Java version - 8");
-            savedTask.setDueDate(LocalDateTime.now().plusDays(2));
-            savedTask.setStatus(IN_PROGRESS);
-            savedTask.setCreatedBy("testUser");
-            savedTask.setCreatedAt(LocalDateTime.now());
+        //Arrange response
+         Task savedTask = new Task();
+         savedTask.setTaskId(1L);
+         savedTask.setTaskName("Java");
+         savedTask.setDescription("Java version - 8");
+         savedTask.setDueDate(LocalDateTime.now().plusDays(2));
+         savedTask.setStatus(IN_PROGRESS);
+         savedTask.setCreatedBy("testUser");
+         savedTask.setCreatedAt(LocalDateTime.now());
 
             when(taskRepository.save(any(Task.class))).thenReturn(savedTask);
 
