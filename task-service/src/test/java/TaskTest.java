@@ -26,13 +26,13 @@ public class TaskTest {
      @Test
      public void testCreateTask_Success() {
             //Arrange input
-            Task task = new Task();
-            task.setTaskName("Java");
-            task.setDescription("Java version - 8");
-            task.setDueDate(LocalDateTime.now().plusDays(2));
-            task.setStatus(IN_PROGRESS);
-            task.setCreatedBy("testUser");
-            task.setCreatedAt(LocalDateTime.now());
+        Task task = new Task();
+        task.setTaskName("Java");
+        task.setDescription("Java version - 8");
+        task.setDueDate(LocalDateTime.now().plusDays(2));
+        task.setStatus(IN_PROGRESS);
+        task.setCreatedBy("testUser");
+        task.setCreatedAt(LocalDateTime.now());
 
             //Arrange response
             Task savedTask = new Task();
