@@ -49,13 +49,12 @@ public class TaskTest {
             // Act
          Task response = taskServiceImpl.createTask(task);
 
-
             // Assert
-            assertNotNull(response);
-            assertEquals(savedTask.getTaskId(), response.getTaskId());
-            assertEquals(savedTask.getTaskName(), response.getTaskName());
-            assertEquals(savedTask.getCreatedBy(), response.getCreatedBy());
-            assertEquals(savedTask.getStatus(), response.getStatus());
+         assertNotNull(response);
+         assertEquals(savedTask.getTaskId(), response.getTaskId());
+         assertEquals(savedTask.getTaskName(), response.getTaskName());
+         assertEquals(savedTask.getCreatedBy(), response.getCreatedBy());
+         assertEquals(savedTask.getStatus(), response.getStatus());
         }
 
     @Test
