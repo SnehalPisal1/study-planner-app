@@ -25,16 +25,20 @@ public class TaskTest {
     @InjectMocks
     private TaskServicesImpl taskServiceImpl;
 
-     @Test
-     public void testCreateTask_Success() {
-            //Arrange input
-        Task task = new Task();
+    private Task task;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        task = new Task();
+        task.setTaskId(1L);
         task.setTaskName("Java");
         task.setDescription("Java version - 8");
         task.setDueDate(LocalDateTime.now().plusDays(2));
         task.setStatus(IN_PROGRESS);
         task.setCreatedBy("testUser");
         task.setCreatedAt(LocalDateTime.now());
+    }
 
         //Arrange response
          Task savedTask = new Task();
