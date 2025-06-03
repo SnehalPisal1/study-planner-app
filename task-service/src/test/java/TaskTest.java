@@ -43,14 +43,13 @@ public class TaskTest {
      @Test
      public void testCreateTask_Success() {
         //Arrange response
-         Task savedTask = new Task();
-         savedTask.setTaskId(1L);
-         savedTask.setTaskName("Java");
-         savedTask.setDescription("Java version - 8");
-         savedTask.setDueDate(LocalDateTime.now().plusDays(2));
-         savedTask.setStatus(IN_PROGRESS);
-         savedTask.setCreatedBy("testUser");
-         savedTask.setCreatedAt(LocalDateTime.now());
+         Task inputTask = new Task();
+         inputTask.setTaskName("Java");
+         inputTask.setDescription("Java version - 8");
+         inputTask.setDueDate(LocalDateTime.now().plusDays(2));
+         inputTask.setStatus(IN_PROGRESS);
+         inputTask.setCreatedBy("testUser");
+         inputTask.setCreatedAt(LocalDateTime.now());
 
          when(taskRepository.save(any(Task.class))).thenReturn(savedTask);
 
