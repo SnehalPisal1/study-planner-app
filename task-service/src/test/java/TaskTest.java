@@ -40,6 +40,8 @@ public class TaskTest {
         task.setCreatedAt(LocalDateTime.now());
     }
 
+     @Test
+     public void testCreateTask_Success() {
         //Arrange response
          Task savedTask = new Task();
          savedTask.setTaskId(1L);
