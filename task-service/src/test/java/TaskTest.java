@@ -51,7 +51,7 @@ public class TaskTest {
          inputTask.setCreatedBy("testUser");
          inputTask.setCreatedAt(LocalDateTime.now());
 
-         when(taskRepository.save(any(Task.class))).thenReturn(savedTask);
+         when(taskRepository.save(any(Task.class))).thenReturn(task);
 
             // Act
          Task response = taskServiceImpl.createTask(task);
