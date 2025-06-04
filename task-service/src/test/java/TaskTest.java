@@ -53,8 +53,8 @@ public class TaskTest {
 
          when(taskRepository.save(any(Task.class))).thenReturn(task);
 
-            // Act
-         Task response = taskServiceImpl.createTask(task);
+         // Act
+         Task acutalResponse = taskServiceImpl.createTask(inputTask);
 
             // Assert
          assertNotNull(response);
