@@ -72,6 +72,16 @@ public class TaskTest {
     @Test
     public void testGetAllTask(){
 
+        List<Task> expectedList= new ArrayList<>();
+
+        expectedList.add(task);
+
+        when(taskRepository.findByCreatedBy("testUser")).thenReturn(expectedList);
+
+        List<Task> acutalList=taskServiceImpl.getAllTasks("testUser");
+        // Assert
+        assertNotNull(acutalList);
+        assertEquals(expectedList.size(),acutalList.size());
     }
 
 
