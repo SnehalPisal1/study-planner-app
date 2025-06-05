@@ -93,6 +93,7 @@ public class TaskTest {
         List<Task> acutalList=taskServiceImpl.getAllTasks("testUser");
         // Assert
         assertNotNull(acutalList);
+        assertEquals(2,acutalList.size());
         assertEquals(expectedList.size(),acutalList.size());
     }
 
