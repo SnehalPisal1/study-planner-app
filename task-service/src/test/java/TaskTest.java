@@ -105,7 +105,6 @@ public class TaskTest {
         List<Task> expectedList= new ArrayList<>();
 
         //Arrange
-        //already task created in before method
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
 
         //Act
