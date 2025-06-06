@@ -101,5 +101,20 @@ public class TaskTest {
     @Test
     public void testDeleteTask(){
 
+        List<Task> expectedList= new ArrayList<>();
+
+        expectedList.add(task);
+
+        Task newTask = new Task();
+        newTask.setTaskId(2L);
+        newTask.setTaskName("Spring boot");
+        newTask.setDescription("spring boot framework - 3.X");
+        newTask.setDueDate(LocalDateTime.now().plusDays(5));
+        newTask.setStatus(IN_PROGRESS);
+        newTask.setCreatedBy("newTestUser");
+        newTask.setCreatedAt(LocalDateTime.now());
+        expectedList.add(newTask);
+
+
     }
 }
