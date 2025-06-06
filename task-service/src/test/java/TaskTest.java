@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.studyplanner.taskservice.models.TaskStatus.IN_PROGRESS;
 
@@ -103,18 +104,15 @@ public class TaskTest {
 
         List<Task> expectedList= new ArrayList<>();
 
-        expectedList.add(task);
+        //Arrange
+        //already task created in before method
+        when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
 
-        Task newTask = new Task();
-        newTask.setTaskId(2L);
-        newTask.setTaskName("Spring boot");
-        newTask.setDescription("spring boot framework - 3.X");
-        newTask.setDueDate(LocalDateTime.now().plusDays(5));
-        newTask.setStatus(IN_PROGRESS);
-        newTask.setCreatedBy("newTestUser");
-        newTask.setCreatedAt(LocalDateTime.now());
-        expectedList.add(newTask);
+        //Act
+        taskServiceImpl.deleteTask(task.getTaskId());
 
-
+        //Assert
+        verify(taskRepository).deleteById(task.getTaskId()); // Verify delete was called with the right task
+        verify(taskRepository).findById(1L); // Verify existence check
     }
 }
