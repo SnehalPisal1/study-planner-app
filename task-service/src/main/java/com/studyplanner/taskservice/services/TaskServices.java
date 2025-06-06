@@ -12,7 +12,7 @@ public interface TaskServices {
 
     List<Task> getAllTasks(String userName);
 
-    void deleteTask(long taskId);
+    boolean deleteTask(long taskId);
 
     boolean findTask(long taskId);
 
