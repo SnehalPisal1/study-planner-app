@@ -30,8 +30,9 @@ public class TaskServicesImpl implements TaskServices {
     }
 
     @Override
-    public void deleteTask(long taskId) {
-        taskRepository.deleteById(taskId);
+    public boolean deleteTask(long taskId) {
+
+
     }
 
     @Override
