@@ -31,7 +31,12 @@ public class TaskServicesImpl implements TaskServices {
 
     @Override
     public boolean deleteTask(long taskId) {
-
+        boolean exists = taskRepository.existsById(taskId);
+        if (!exists) {
+            return false;
+        }
+        taskRepository.deleteById(taskId);
+        return true;
 
     }
 
