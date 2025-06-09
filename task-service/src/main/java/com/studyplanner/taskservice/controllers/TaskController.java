@@ -132,11 +132,6 @@ public class TaskController {
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @Valid @RequestBody Task task) {
         try {
 
-            if (!taskService.findTask(taskId)) {
-                return ResponseEntity.badRequest()
-                        .body(Map.of("message", "Incorrect Task ID"));
-            }
-
             task.setTaskId(taskId);
             Task updatedTask = taskService.updateTask(task);
 
