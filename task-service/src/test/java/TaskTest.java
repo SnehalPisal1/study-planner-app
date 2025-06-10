@@ -4,6 +4,7 @@ import com.studyplanner.taskservice.services.TaskServicesImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.studyplanner.taskservice.models.TaskStatus.DONE;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
