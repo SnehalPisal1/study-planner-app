@@ -71,6 +71,14 @@ public class TaskTest {
     @Test
     public void testUpdateTask(){
 
+
+
+
+        task.setDescription("Java programming language version - 8");
+        task.setStatus(DONE);
+
+
+
     }
 
     @Test
