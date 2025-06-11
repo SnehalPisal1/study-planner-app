@@ -71,8 +71,9 @@ public class TaskTest {
     @Test
     public void testUpdateTask(){
 
-
-
+        // arrange
+        // -- task already arranged in beforetest method
+        when(taskRepository.findById(task.getTaskId())).thenReturn(Optional.ofNullable(task));
 
         task.setDescription("Java programming language version - 8");
         task.setStatus(DONE);
