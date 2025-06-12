@@ -78,6 +78,7 @@ public class TaskTest {
         task.setDescription("Java programming language version - 8");
         task.setStatus(DONE);
 
+        when(taskRepository.save(task)).thenReturn(task);
 
 
     }
