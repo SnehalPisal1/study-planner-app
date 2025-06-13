@@ -83,6 +83,7 @@ public class TaskTest {
         //act
         Task acutalResponse=taskServiceImpl.updateTask(task);
 
+        assertNotNull(acutalResponse);
         assertEquals(task.getTaskId(), acutalResponse.getTaskId());
         assertEquals(task.getStatus(), acutalResponse.getStatus());
         assertNotEquals("IN_PROGRESS", acutalResponse.getStatus());
