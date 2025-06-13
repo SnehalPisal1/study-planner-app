@@ -83,7 +83,8 @@ public class TaskTest {
         //act
         Task acutalResponse=taskServiceImpl.updateTask(task);
 
-    }
+        assertEquals(task.getTaskId(), acutalResponse.getTaskId());
+          }
 
     @Test
     public void testGetAllTask(){
