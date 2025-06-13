@@ -84,7 +84,9 @@ public class TaskTest {
         Task acutalResponse=taskServiceImpl.updateTask(task);
 
         assertEquals(task.getTaskId(), acutalResponse.getTaskId());
-          }
+        assertEquals(task.getStatus(), acutalResponse.getStatus());
+
+    }
 
     @Test
     public void testGetAllTask(){
