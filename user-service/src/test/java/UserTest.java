@@ -7,5 +7,10 @@ public class UserTest {
 
     }
 
+    @Test
+    public void TestUpdateUser(){
+
+    }
+
 
 }
