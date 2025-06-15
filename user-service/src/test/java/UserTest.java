@@ -14,7 +14,7 @@ public class UserTest {
 
 
     @Test
-    public void TestDeleteUser(){
+    public void testDeleteUser(){
 
     }
 
