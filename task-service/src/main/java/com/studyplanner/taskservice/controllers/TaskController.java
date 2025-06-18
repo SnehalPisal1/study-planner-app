@@ -104,7 +104,7 @@ public class TaskController {
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
     public ResponseEntity<?> deleteTask(@PathVariable long taskId) {
         try {
-            boolean exists= taskService.deleteTask(taskId);
+            boolean isDeleted= taskService.deleteTask(taskId);
 
             Map<String, String> response = new HashMap<>();
             if (!exists) {
