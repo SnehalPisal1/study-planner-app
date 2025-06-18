@@ -107,7 +107,7 @@ public class TaskController {
             boolean isDeleted= taskService.deleteTask(taskId);
 
             Map<String, String> response = new HashMap<>();
-            if (!exists) {
+            if (!isDeleted) {
                 response.put("message", "Task not found");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             } else {
