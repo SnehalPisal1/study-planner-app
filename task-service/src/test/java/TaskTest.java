@@ -87,7 +87,7 @@ public class TaskTest {
         assertEquals(task.getTaskId(), acutalResponse.getTaskId());
         assertEquals(task.getStatus(), acutalResponse.getStatus());
         assertNotEquals("IN_PROGRESS", acutalResponse.getStatus());
-        assertEquals(task.getDescription(),acutalResponse.getDescription());
+        assertEquals(task.getCreatedBy(),acutalResponse.getCreatedBy());
 
     }
 
