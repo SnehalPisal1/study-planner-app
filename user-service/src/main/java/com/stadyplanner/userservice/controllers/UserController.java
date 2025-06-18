@@ -54,6 +54,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable long userId){
 
+        Map<String , String> response = new HashMap<>();
         try {
             boolean exists = userService.findUser(userId);
 
