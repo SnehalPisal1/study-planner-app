@@ -56,7 +56,7 @@ public class UserController {
 
         Map<String , String> response = new HashMap<>();
         try {
-            boolean exists = userService.findUser(userId);
+            boolean isDeleted = userService.deleteUser(userId);
 
             Map<String, String> response = new HashMap<>();
             if (!exists) {
