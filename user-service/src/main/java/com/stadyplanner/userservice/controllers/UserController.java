@@ -58,8 +58,7 @@ public class UserController {
         try {
             boolean isDeleted = userService.deleteUser(userId);
 
-            Map<String, String> response = new HashMap<>();
-            if (!exists) {
+            if (!isDeleted) {
                 response.put("message", "User not found");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             } else {
