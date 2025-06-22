@@ -10,7 +10,7 @@ public interface UserService {
 
     Optional<User> getUserByUsername(String username);
 
-    void deleteUser(long userId);
+    boolean deleteUser(long userId);
 
     User updateUser(long userId,User user);
 
